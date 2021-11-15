@@ -1,0 +1,27 @@
+server:
+  port: 8001
+
+cluster:
+  nacos:
+    node1: 127.0.0.1:8848
+
+spring:
+  application:
+    name: study-zipkin-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${cluster.nacos.node1}
+        register-enabled: true
+        group: study
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
+      probability: 1.0
+  zipkin:
+    # 指定了 Zipkin 服务器的地址
+    base-url: http://127.0.0.1:9411/
+
